@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+    <style>
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #9ab1b5;
+      }
+      
+      li {
+        float: left;
+      }
+      
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+      
+      li a:hover {
+        background-color: #e5ebee;
+      
+      }
+      p.solid {border-style: solid; border-color:rgb(132, 161, 161);}
+      h1 { color: rgb(132, 161, 161);}
+  
+h2 { color: rgb(129, 198, 198);}
+
+body {text-align: center;} 
+/* I looked at w3 schhols to understand more css*/
+
+    #enterDetails {float: left; width: 50%;}
+    #findDetails{float: left; width: 50%;}
+    h3 {color: rgb(129, 198, 198);}
+    h4 {color:rgb(129, 198, 198);}
+
+    /* Style the body */
+body {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding: 0;
+}
+
+#quiz {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+}
+
+h2, p {
+  color: #333;
+}
+
+input[type="radio"] {
+  margin-right: 5px;
+}
+
+button {
+  background-color:  #6abbb4;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #6089b5;
+}
+
+
+#result {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+#quiz-form div {
+  margin-bottom: 10px;
+}
+    </style>
+
+<body>
+    <ul>
+        <li><a href="index.html">Home💙</a></li>
+        <li><a href="about.html">Quiz🤍</a></li>
+        <li><a href="contact.html">Physical🤍</a></li>
+        <li><a href="mental.html">Mental/emotional🤍</a></li>
+        <li><a href="social.html">Social🤍</a></li>
+        <li><a href="spiritual.html">Spiritual🤍</a></li>
+        <li><a href="Database.html">Youth line🤍</a></li>
+      </ul>
+
+<h1> MENTAL HEALTH QUIZ</h1>
+<p class="solid"></p>
+<h3> Try my quiz about what you have learned throught readin my website!</h3>
+<div id="quiz">
+  <form id="quiz-form">
+    <h2>Question 1:</h2>
+    <p>How do you manage a panic attack?</p>
+    <label>
+      <input type="radio" name="q1" value="a"> a) drink coffee
+    </label>
+    <label>
+      <input type="radio" name="q1" value="b"> b) belly breathing
+    </label>
+    <label>
+      <input type="radio" name="q1" value="c"> c) shallow breathing
+    </label>
+    <label>
+      <input type="radio" name="q1" value="d"> d) drink alcohol
+    </label>
+
+    <h2>Question 2:</h2>
+    <p>What diamention of well-being does this this statement relate too?</p>
+    <p><b>"my stomach hurts from being anxious"</b></p>
+    
+    <label>
+      <input type="radio" name="q2" value="a"> a) Mental and Emotional
+    </label>
+    <label>
+      <input type="radio" name="q2" value="b"> b) Spiritual
+    </label>
+    <label>
+      <input type="radio" name="q2" value="c"> c) Physical
+    </label>
+    <label>
+      <input type="radio" name="q2" value="d"> d) Social
+    </label>
+
+    <h2>Question 3:</h2>
+    <p>What answer is correct to enhance your physical wellbeing?</p>
+    <label>
+      <input type="radio" name="q3" value="a"> a) Eat anything you want
+    </label>
+    <label>
+      <input type="radio" name="q3" value="b"> b) Go on daily walks
+    </label>
+    <label>
+      <input type="radio" name="q3" value="c"> c) Stay inside all day
+    </label>
+    <label>
+      <input type="radio" name="q3" value="d"> d) Sleep it off
+    </label>
+
+    <h2>Question 4:</h2>
+    <p> Which answer is correct, to enhance your social well being?</p>
+    <label>
+      <input type="radio" name="q4" value="a"> a) Join sport or a club
+    </label>
+    <input type="radio" name="q4" value="b"> b) sit at home alone
+    <label>
+      <input type="radio" name="q4" value="c"> c) Watch tv shows all day
+    </label>
+    <label>
+      <input type="radio" name="q4" value="d"> d) never go out
+    </label>
+<br> <br>
+    <button type="button" onclick="calculateScore()">Submit</button>
+  </form>
+</div>
+
+<div id="result">
+  <h2>Your Score:</h2>
+  <p id="score">0</p>
+</div>
+
+<script>
+  function calculateScore() {
+    // Initialize score, set at zero
+    let score = 0;
+
+    // Get the user's answers by declearing the vairbles that I have created
+    const q1Answer = document.querySelector('input[name="q1"]:checked');
+    const q2Answer = document.querySelector('input[name="q2"]:checked');
+    const q3Answer = document.querySelector('input[name="q3"]:checked');
+    const q4Answer = document.querySelector('input[name="q4"]:checked');
+
+    // Check answers and update score
+    // "&&"" - combines 2 conditions to check if they have they are both right. eg: - did the user get the right question? (chat gpt helped me to be able to combine the 2 conditions)
+    // eg: - did the user get the right question?, has the uset answerd the question correctly?
+    // using "if" method that I have learned in class to make my quiz                      
+    // this "if" statement                                     
+    if (q1Answer && q1Answer.value === "b") {
+      score++;
+    }
+    if (q2Answer && q2Answer.value === "c") {
+      score++;
+    }
+    if (q3Answer && q3Answer.value === "b") {
+      score++;
+    }
+    if (q4Answer && q4Answer.value === "a") {
+      score++;
+    }
+
+    // Display the score
+    const scoreDisplay = document.getElementById("score");
+    // the score display is displaying the score out of three 
+    scoreDisplay.textContent = score + " out of 4";
+  }
+</script>
+
+</html>

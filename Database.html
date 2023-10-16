@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+    <style>
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #9ab1b5;
+      }
+      
+      li {
+        float: left;
+      }
+      
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+      
+      li a:hover {
+        background-color: #e5ebee;
+      
+      }
+      p.solid {border-style: solid; border-color:rgb(132, 161, 161);}
+      h1 { color: rgb(132, 161, 161);}
+  
+h2 { color: rgb(129, 198, 198);}
+body {text-align: center;} 
+    #enterDetails {float: left; width: 50%;}
+    #findDetails{float: left; width: 50%;}
+    h3 {color: rgb(129, 198, 198);}
+    p.solid {border-style: solid; border-color:rgb(132, 161, 161);}
+    h4 { color: rgb(102, 138, 138);}
+
+body {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #9ab1b5;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #e5ebee;
+}
+
+/* Style headings */
+h1 {
+  color: rgb(132, 161, 161);
+}
+
+h2 {
+  color: rgb(129, 198, 198);
+}
+
+h3 {
+  color: rgb(129, 198, 198);
+}
+
+h4 {
+  color: rgb(102, 138, 138);
+}
+
+/* Style form elements */
+input[type="text"],
+input[type="number"] {
+  width: 40%;
+  padding: 8px;
+  margin: 4px 0;
+  box-sizing: border-box;
+}
+
+/* Style buttons */
+button {
+  background-color: #6abbb4;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #59d6c5;
+}
+
+/* Style result display */
+#findName,
+#findAge {
+  font-weight: bold;
+}
+
+/* Style the poster image */
+#Youth img {
+  display: block;
+  margin: 0 auto;
+}
+    </style>
+
+<body>
+    <ul>
+        <li><a href="index.html">Home💙</a></li>
+        <li><a href="about.html">Quiz🤍</a></li>
+        <li><a href="contact.html">Physical🤍</a></li>
+        <li><a href="mental.html">Mental/emotional🤍</a></li>
+        <li><a href="social.html">Social🤍</a></li>
+        <li><a href="spiritual.html">Spiritual🤍</a></li>
+        <li><a href="Database.html">Youth line🤍</a></li>
+      </ul>
+
+     <h1> Sign in from the information below if you are wanting to have a youth line session call</h1>
+     
+     <p class="solid"></p>
+
+     <div id="enterDetails">
+      <h1>Enter Details</h1>
+       <h4>Phone Number</h4>
+     <input id="enterID" type="text">
+    
+     <h4>Name</h4>
+     <input id="enterName" type="text">
+    
+     <h4>Age</h4>
+     <input id="enterAge" type="number"> <br><br>
+    
+     <button id="insert">INSERT</button>
+     <button id="update">UPDATE</button>
+     <button id="remove">REMOVE</button>  
+    
+       </div>
+        
+    <div id="findDetails">
+        <h1>Find phone number</h1>
+         <h4>Phone Number</h4>
+         <input id="findID" type="text"> <br><br>
+         <button id="find">FIND</button>
+         
+         <h3 id="findName" type="text"></h3>
+         <h3 id="findAge" type="text"></h3> <br><br>
+        
+    </div>
+    
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyB48vhHTM-L8W0Q1yl8cH-bdqi8fopRyeQ",
+          authDomain: "database-bc270.firebaseapp.com",
+          databaseURL: "https://database-bc270-default-rtdb.asia-southeast1.firebasedatabase.app",
+          projectId: "database-bc270",
+          storageBucket: "database-bc270.appspot.com",
+          messagingSenderId: "90589888020",
+          appId: "1:90589888020:web:535425083c93c273ae3101"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+    
+        import {getDatabase, set, get, update, remove, ref, child}
+        from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js"
+    
+        const db = getDatabase();
+    
+        var enterID = document.querySelector("#enterID");
+        var enterName = document.querySelector("#enterName");
+        var enterAge = document.querySelector("#enterAge");
+        var findID = document.querySelector("#findID");
+        var findName = document.querySelector("#findName");
+        var findAge = document.querySelector("#findAge");
+    
+        var insertBtn = document.querySelector("#insert");
+        var updateBtn = document.querySelector("#update");
+        var removeBtn = document.querySelector("#remove");
+        var findBtn = document.querySelector("#find");
+    
+        function InsertData () {
+           set(ref(db, "People/" + enterID.value), {
+            Name: enterName.value,
+             ID: enterID.value,
+            Age: enterAge.value,
+           })
+            .then(()=>{
+                alert("Data added successfully!")
+            })
+            .catch((error)=>{
+                alert(error)
+            })
+        }
+    
+        function FindData () {
+            const dbref = ref(db)
+            
+            get(child(dbref, "People/" + findID.value))
+            .then((snapshot)=>{
+                if (snapshot.exists()) {
+                findName.innerHTML = "Name: " + snapshot.val().Name;
+                findAge.innerHTML = "Age: " + snapshot.val().Age;
+                } else {
+                    alert("no data found!");
+                }
+            })
+            .catch((error)=> {
+                alert(error)
+            })
+           
+        }
+    
+        function UpdateData() {
+                update(ref(db, "People/" + enterID.value), {
+                    Name: enterName.value,
+                    Age: enterAge.value   
+            })
+           .then(()=>{
+            alert("Data updated sucessfully!")
+           })
+           .catch((error)=>{
+            alert(error)
+           });
+    
+            }
+    
+        function RemoveData () {
+            remove(ref(db,"People/" + enterID.value))
+            .then(()=>{
+                alert("Data removed sucessfully!")
+            })
+            .catch((error)=>{
+                alert(error);
+            })
+        }
+    
+        insertBtn.addEventListener('click', InsertData);
+        updateBtn.addEventListener('click', UpdateData);
+        removeBtn.addEventListener('click', RemoveData);
+        findBtn.addEventListener('click', FindData);
+    
+      </script>
+      <h3> Just for saftey purposes, enter your phone number again to check if its correct!</h3>
+      <br><br>
+      <br><br>
+      <br> <br>
+      <p class="solid"></p>
+      <br>
+      <h2> Scroll Down to see our poster for our youth line!</h2>
+      <h4>If you are not wanting to enter your personal deatiles you can call anonymously with this phone number!</h4>
+      <div id="Youth" >
+        <img src="Screen Shot 2023-03-24 at 12.13.17 PM.png" width="30%" height="30%">
+       </div>
+      </body>
+      
